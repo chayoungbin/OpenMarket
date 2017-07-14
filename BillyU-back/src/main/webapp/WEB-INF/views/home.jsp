@@ -12,6 +12,6 @@
  
 <P>  The time on the server is ${serverTime}. </P>
 <p> This is my Database </p>
-<p> ${showDB}</p>
+<p> ${showUser}</p>
 </body>
 </html>
