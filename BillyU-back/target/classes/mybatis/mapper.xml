@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace= "userControlMapper" >
-    <select id ="selectUser" parameterType="java.util.HashMap" resultType= "user.userDTO">
+    <select id ="selectUser" parameterType="user.userDTO" resultType= "user.userDTO">
         select *
         from user
     </select >
     <delete id="remove" parameterType="String">
-		delete from user where nickname=#{id}
+		delete from user where usernumber=#{delete_user}
 	</delete>
 	<insert id="add" parameterType="user.userDTO">
 		insert into user

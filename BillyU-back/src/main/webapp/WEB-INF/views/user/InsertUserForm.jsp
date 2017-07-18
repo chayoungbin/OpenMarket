@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>회원등록</h1>
-<form action="InsertUser" method="post">
-닉네임 : <input type="text" name="insert_nickname" /><p>
-번호 : <input type="text" name="insert_usernumber" /><p>
-<input type="submit" value="등록" />
-</form>
+  <h1>회원등록</h1>
+	<form action="InsertUser" method="post">
+	닉네임 : <input type="text" name="insert_nickname" /><p>
+	번호 : <input type="text" name="insert_usernumber" /><p>
+	<input type="submit" value="등록" />
+	</form>
+	<a href="Back_Main">홈으로</a>
 </body>
 </html>

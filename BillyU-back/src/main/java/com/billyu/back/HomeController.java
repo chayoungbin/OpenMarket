@@ -29,7 +29,7 @@ public class HomeController {
 	
 	@Autowired
     private SqlSession sqlSession1;
-	//sqlsession 등록
+	//sqlsession 
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -47,51 +47,38 @@ public class HomeController {
 
 		return "Back_Main";
 	}
-	//default 페이지
-	@RequestMapping(value="/user/SelectUser")
-	public String selectUser(Model model){
-		//List<HashMap<String, String>> selectUser = sqlSession1.selectList("userControlMapper.selectUser");
-        //model.addAttribute("SelectUser", selectUser.toString());
-        
-        List<userDTO> list = sqlSession1.selectList("selectUser");
-        model.addAttribute("list",list.toString());
-		return "user/SelectUserForm";
-	}//유저목록보기
 	
-	@RequestMapping(value="/user/DeleteUser")
-	public String deleteUser(){
-		String id ="1234";
+	@RequestMapping(value="/DeleteUser")
+	public String deleteUser(HttpServletRequest request){
+		String delete_user = request.getParameter("delete_user");
 		try{
-			sqlSession1.delete("remove",id);	
-			sqlSession1.close();	//	세션닫기	
+			sqlSession1.delete("remove",delete_user);	
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 	return "Back_Main";
-	}//유저삭제
+	}
 	
-	@RequestMapping(value="/user/InsertUser")
+	@RequestMapping(value="/InsertUser")
 	public String insertUser(HttpServletRequest request){
 		try{
 		String insert_nickname = request.getParameter("insert_nickname");
 		String insert_usernumber = request.getParameter("insert_usernumber");
 		userDTO dto = new userDTO(insert_nickname, insert_usernumber);
 		sqlSession1.insert("add",dto);
-		sqlSession1.close();
 	}
 	catch(Exception e){
 		e.printStackTrace();
 	}
 		return "Back_Main";
-	}//유저등록
+	}
 	
 	@RequestMapping(value="/UpdateUser")
-	public String updateUser(){
+	public String updateUser(HttpServletRequest request){
 	try{
-			userDTO dto = new userDTO("영뷘","1234");
+		userDTO dto = new userDTO("asd","1234");
 		sqlSession1.update("update",dto);
-		sqlSession1.close();
 	}
 	catch(Exception e){
 		e.printStackTrace();
@@ -99,14 +86,25 @@ public class HomeController {
 		return "Back_Main";
 	}//
 	
-	//단순 페이지 맵핑
-	@RequestMapping(value="/user/DeleteUserForm")
+	@RequestMapping(value="/Back_Main")
+	public String Back_Main(){return "Back_Main";}
+	@RequestMapping(value="/DeleteUserForm")
 	public String DeleteUserFrom(){return "user/DeleteUserForm";}
-	@RequestMapping(value="/user/InsertUserForm")
+	@RequestMapping(value="/InsertUserForm")
 	public String InsertUserFrom(){return "user/InsertUserForm";}
-	@RequestMapping(value="/user/SelectUserForm")
-	public String SelectUserFrom(){return "user/SelectUserForm";}
-	@RequestMapping(value="/user/UpdateUserForm")
+	@RequestMapping(value="/SelectUserForm")
+	public String SelectUserFrom(Model model){
+		//List<HashMap<String, String>> selectUser = sqlSession1.selectList("userControlMapper.selectUser");
+        //model.addAttribute("SelectUser", selectUser.toString());
+        
+        List<userDTO> list = sqlSession1.selectList("selectUser");
+        for(userDTO dto: list){
+        	model.addAttribute("nick",dto.getNickname());
+        	model.addAttribute("usernum",dto.getUsernumber());
+        }
+        //model.addAttribute("list",list.toString());
+		return "user/SelectUserForm";}
+	@RequestMapping(value="/UpdateUserForm")
 	public String UpdateUserFrom(){return "user/UpdateUserForm";}
 	
 }

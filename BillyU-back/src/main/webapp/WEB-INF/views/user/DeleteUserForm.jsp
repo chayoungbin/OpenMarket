@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<form action="DeleteUser" method="post">
+회원번호 : <input type="text" name="delete_user" />
+<input type="submit" value="삭제" />
+</form>
+<a href="Back_Main">홈으로</a>
 </body>
 </html>

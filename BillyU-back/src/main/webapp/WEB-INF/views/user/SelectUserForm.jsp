@@ -12,14 +12,9 @@
     사용자목록  
 </h1>
 <p> This is my Database </p>
-  <!--
-	<p> ${list.usernumber}</p>
-	<p> ${list.nickname}</p>
-  -->
-<c:forEach var="item" items="${list}">
-    이름 : ${item.nickname}
-    나이 : ${item.usernumber}
-</c:forEach>
 
+ ${nick} <p>
+ ${usernum}
+<a href="Back_Main">홈으로</a>
 </body>
 </html>

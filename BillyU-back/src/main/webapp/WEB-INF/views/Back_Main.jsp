@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>¹é¿ÀÇÇ½º</title>
+<title>ë°±ì˜¤í”¼ìŠ¤</title>
 <style>
 #userlist{
 	width:45%;
@@ -28,24 +28,17 @@
 <center>
   <div id="userlist">
 	<center>
-		<h1>»ç¿ëÀÚ°ü¸®</h1>
-		<table>
-		 <tr>
-		  <td>UserNumber</td>
-		  <td>Nickname</td>
-		  <td>»èÁ¦</td>
-		  <td>¼öÁ¤</td>
-		 </tr>
-		</table>
-		<a href="user/InsertUserForm">À¯Àúµî·Ï</a><p>
-		<a href="user/SelectUserForm">À¯Àú¸ñ·Ï</a><p>
-		<a href="user/DeleteUserForm">À¯Àú»èÁ¦</a><p>
-		<a href="user/UpdateUserForm">À¯Àú¼öÁ¤</a><p>
+		<h1><a href="Back_Main">ì‚¬ìš©ìžê´€ë¦¬</a></h1>
+		<a href="InsertUserForm">ìœ ì €ë“±ë¡</a><p>
+		<a href="SelectUserForm">ìœ ì €ëª©ë¡</a><p>
+		<a href="DeleteUserForm">ìœ ì €ì‚­ì œ</a><p>
+		<a href="UpdateUserForm">ìœ ì €ìˆ˜ì •</a><p>
 	</center>
   </div>
+
   <div id="productlist">
 		<center>
-		<h1>»óÇ°°ü¸®</h1>
+		<h1>ìƒí’ˆê´€ë¦¬</h1>
 		</center>
   </div>
 </center>
