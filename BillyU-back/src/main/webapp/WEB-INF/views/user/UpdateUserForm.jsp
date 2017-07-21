@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="UpdateUser" method="post">
+닉네임 : <input type="text" name="prenick" /><p>
+바꿀 닉네임 : <input type="text" name="nextnick" />
+<input type="submit" value="변경" />
+</form>
 <a href="Back_Main">홈으로</a>
 </body>
 </html>

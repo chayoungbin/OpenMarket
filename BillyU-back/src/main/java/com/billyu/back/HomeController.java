@@ -77,7 +77,9 @@ public class HomeController {
 	@RequestMapping(value="/UpdateUser")
 	public String updateUser(HttpServletRequest request){
 	try{
-		userDTO dto = new userDTO("asd","1234");
+		String prenick = request.getParameter("prenick");
+		String nextnick = request.getParameter("nextnick");
+		userDTO dto = new userDTO(prenick,nextnick);
 		sqlSession1.update("update",dto);
 	}
 	catch(Exception e){
