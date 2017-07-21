@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace= "selectMapper" >
+    <select id="select_team_record" parameterType="team_record.team_recordVO" resultType="team_record.team_recordVO">
+    	select * 
+    	from team_record
+    </select>
+    <select id="select_team" parameterType="team.teamVO" resultType="team.teamVO">
+    	select * 
+    	from team
+    	order by win desc , score_s desc
+    </select>
+</mapper>

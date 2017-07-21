@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace= "userControlMapper" >    
+    <insert id="insert_team" parameterType="team.teamVO">
+		insert into team
+		values(#{club_name},#{batting},#{defense},#{win})
+	</insert>
+	<update id="win" parameterType="String">
+		update team_record
+		set win = win+1 , total = total+1
+		where club_name = #{club_name}
+	</update>
+	<update id="draw" parameterType="String">
+		update team_record
+		set draw = draw+1 , total = total+1
+		where club_name = #{club_name}
+	</update>
+	<update id="lose" parameterType="String">
+		update team_record
+		set lose = lose+1 , total = total+1
+		where club_name = #{club_name}
+	</update>
+	<update id="addscore" parameterType="team.teamVO">
+		update team
+		set score_s = score_s + #{score_s} , score_f = score_f + #{score_f}
+		where club_name = #{club_name}
+	</update>
+	<update id="add_winrate" parameterType="team.teamVO">
+		update team
+		set win = #{win_rate}
+		where club_name = #{club_name}
+	</update>
+	<insert id="insert_result" parameterType="game_result.game_resultVO">
+		insert into game_result 
+		values(#{matchday},#{home},#{away},#{home_score},#{away_score},#{forecate})
+	</insert>
+	<update id="relative_homewin" parameterType="relative.relativeVO">
+		update relative
+		set win = win+1
+		where home = #{home} and away=#{away}
+	</update>
+	<update id="relative_homelose" parameterType="relative.relativeVO">
+		update relative
+		set lose = lose+1
+		where home = #{home} and away=#{away}
+	</update>
+	<update id="relative_awaywin" parameterType="relative.relativeVO">
+		update relative
+		set win = win+1
+		where home = #{away} and away=#{home}
+	</update>
+	<update id="relative_awaylose" parameterType="relative.relativeVO">
+		update relative
+		set lose = lose+1
+		where home = #{away} and away=#{home}
+	</update>
+	<update id="relative_draw" parameterType="relative.relativeVO">
+		update relative
+		set tie = tie+1
+		where home = #{home} and away=#{away} or home=#{away} and away=#{home}
+	</update>
+	<update id="rank_update" parameterType="team.teamVO">
+		update team
+		set rank = #{rank}
+		where club_name = #{club_name}
+	</update>
+	<insert id="insert_play" parameterType="play.playVO">
+		insert into play 
+		values(#{matchday},#{home},#{away},#{prediction})
+	</insert>
+</mapper>
