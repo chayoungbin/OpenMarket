@@ -40,6 +40,7 @@
 <input type="submit" value="저장" />
 </form>
 <hr />
-<a href="Main">홈으로 돌아가기</a>
+<a href="Main">홈으로 돌아가기</a><p>
+${homes} , ${aways}
 </body>
 </html>

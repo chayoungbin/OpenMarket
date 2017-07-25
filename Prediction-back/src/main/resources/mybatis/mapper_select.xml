@@ -2,13 +2,65 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace= "selectMapper" >
+	<!-- 팀기록 가져오기  -->
     <select id="select_team_record" parameterType="team_record.team_recordVO" resultType="team_record.team_recordVO">
     	select * 
     	from team_record
     </select>
+    
+    <!-- 승률별로 랭킹 정하기  -->
     <select id="select_team" parameterType="team.teamVO" resultType="team.teamVO">
     	select * 
     	from team
     	order by win desc , score_s desc
+    </select>
+    
+    <!-- 예측정보 가져오기  -->
+    <select id="select_prediction" parameterType="play.playVO" resultType="String" >
+    	select prediction 
+    	from play 
+    	where matchday = #{matchday} and home = #{home} and away = #{away}
+    </select>
+    
+    <!-- 연승가져오기  -->
+    <select id="select_streak" parameterType="String" resultType="double">
+    	select streak 
+    	from team_record
+    	where club_name = #{club_name}
+	</select>
+	
+	<!-- 상대전적 가져오기  -->
+	<select id="select_relative" parameterType="relative.relativeVO" resultType="relative.relativeVO">
+    	select * 
+    	from relative
+    	where home = '${home}' and away = '${away}'
+    </select>
+    
+    <!-- 홈팀정보 가져오기(예측계산할때) -->
+    <select id="select_hometeam_list" parameterType="String" resultType="team.teamVO">
+    	select * 
+    	from team
+    	where club_name = '${value}'
+    </select>
+    
+    <!-- 원정팀정보 가져오기(예측계산할때) -->
+    <select id="select_awayteam_list" parameterType="String" resultType="team.teamVO">
+    	select * 
+    	from team
+    	where club_name = '${value}'
+    </select>
+    
+    <!-- 홈팀기록 가져오기(예측계산할때) -->
+    <select id="select_hometeam_record" parameterType="String" resultType="team_record.team_recordVO">
+    	select * 
+    	from team_record
+    	where club_name = '${value}'
+    </select>
+    
+    <!-- 원정팀정기록 가져오기(예측계산할때) -->
+    <select id="select_awayteam_record" parameterType="String" resultType="team_record.team_recordVO">
+    	select * 
+    	from team_record
+    	where club_name = '${value}'
     </select>
 </mapper>

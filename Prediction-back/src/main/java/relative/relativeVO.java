@@ -8,6 +8,8 @@ public class relativeVO {
 	int lose;
 	int tie;
 	
+	public relativeVO(){}
+	
 	public relativeVO(String home,String away,int win,int lose,int tie){
 		this.home = home;
 		this.away = away;
@@ -19,46 +21,36 @@ public class relativeVO {
 		this.home = home;
 		this.away = away;
 	}
-
-	public String getTeam1() {
+	public String getHome() {
 		return home;
 	}
-
-	public void setTeam1(String team1) {
-		this.home = team1;
+	public void setHome(String home) {
+		this.home = home;
 	}
-
-	public String getTeam2() {
+	public String getAway() {
 		return away;
 	}
-
-	public void setTeam2(String team2) {
-		this.away = team2;
+	public void setAway(String away) {
+		this.away = away;
 	}
-
-	public int getTeam1_win() {
+	public int getWin() {
 		return win;
 	}
-
-	public void setTeam1_win(int team1_win) {
-		this.win = team1_win;
+	public void setWin(int win) {
+		this.win = win;
 	}
-
-	public int getTeam2_win() {
+	public int getLose() {
 		return lose;
 	}
-
-	public void setTeam2_win(int team2_win) {
-		this.lose = team2_win;
+	public void setLose(int lose) {
+		this.lose = lose;
 	}
-
 	public int getTie() {
 		return tie;
 	}
-
 	public void setTie(int tie) {
 		this.tie = tie;
 	}
-	
+
 	
 }

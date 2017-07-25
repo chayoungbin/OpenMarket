@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace= "userControlMapper" >
-    <select id ="selectSample" parameterType="java.util.HashMap" resultType= "java.util.HashMap">
-        select *
-        from test
-       
-    </select >
+	<select id="select_relative" parameterType="relative.relativeDTO" resultType="relative.relativeDTO">
+		select *
+		from relative
+		where home='${home}' and away = '${away}'
+	</select>
 </mapper>

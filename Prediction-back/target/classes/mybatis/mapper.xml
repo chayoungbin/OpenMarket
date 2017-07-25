@@ -2,71 +2,122 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace= "userControlMapper" >    
-    <insert id="insert_team" parameterType="team.teamVO">
-		insert into team
-		values(#{club_name},#{batting},#{defense},#{win})
-	</insert>
+	
+	<!-- 승리업데이트  -->
 	<update id="win" parameterType="String">
 		update team_record
 		set win = win+1 , total = total+1
 		where club_name = #{club_name}
 	</update>
+	
+	<!-- 무승부업데이트  -->
 	<update id="draw" parameterType="String">
 		update team_record
 		set draw = draw+1 , total = total+1
 		where club_name = #{club_name}
 	</update>
+	
+	<!-- 패배업데이트  -->
 	<update id="lose" parameterType="String">
 		update team_record
 		set lose = lose+1 , total = total+1
 		where club_name = #{club_name}
 	</update>
+	
+	<!-- 득실점 업데이트  -->
 	<update id="addscore" parameterType="team.teamVO">
 		update team
 		set score_s = score_s + #{score_s} , score_f = score_f + #{score_f}
 		where club_name = #{club_name}
 	</update>
+	
+	<!-- 승률 업데이트 -->
 	<update id="add_winrate" parameterType="team.teamVO">
 		update team
 		set win = #{win_rate}
 		where club_name = #{club_name}
 	</update>
+	
+	<!-- 경기결과 입력  -->
 	<insert id="insert_result" parameterType="game_result.game_resultVO">
 		insert into game_result 
 		values(#{matchday},#{home},#{away},#{home_score},#{away_score},#{forecate})
 	</insert>
+	
+	<!-- 상대전적(홈승리)  -->
 	<update id="relative_homewin" parameterType="relative.relativeVO">
 		update relative
 		set win = win+1
 		where home = #{home} and away=#{away}
 	</update>
+	
+	<!-- 상대전적(홈패배)  -->
 	<update id="relative_homelose" parameterType="relative.relativeVO">
 		update relative
 		set lose = lose+1
 		where home = #{home} and away=#{away}
 	</update>
+	
+	<!-- 상대전적(원정승리)  -->
 	<update id="relative_awaywin" parameterType="relative.relativeVO">
 		update relative
 		set win = win+1
 		where home = #{away} and away=#{home}
 	</update>
+	
+	<!-- 상대전적(원정패) -->
 	<update id="relative_awaylose" parameterType="relative.relativeVO">
 		update relative
 		set lose = lose+1
 		where home = #{away} and away=#{home}
 	</update>
+	
+	<!-- 상대전적(무승부)  -->
 	<update id="relative_draw" parameterType="relative.relativeVO">
 		update relative
 		set tie = tie+1
 		where home = #{home} and away=#{away} or home=#{away} and away=#{home}
 	</update>
+	
+	<!-- 순위업데이트  -->
 	<update id="rank_update" parameterType="team.teamVO">
 		update team
 		set rank = #{rank}
 		where club_name = #{club_name}
 	</update>
+	
+	<!-- 오늘의경기 입력  -->
 	<insert id="insert_play" parameterType="play.playVO">
 		insert into play 
 		values(#{matchday},#{home},#{away},#{prediction})
 	</insert>
+	
+	<!-- 연승 업데이트  -->
+	<update id="streak_wining" parameterType="String">
+		update team_record
+		set streak = streak+1
+		where club_name = #{club_name}
+	</update>
+	
+	<!-- 연패 업데이트  -->
+	<update id="streak_losing" parameterType="String">
+		update team_record
+		set streak = streak-1
+		where club_name = #{club_name}
+	</update>
+	
+	<!-- 연패탈출 업데이트  -->
+	<update id="streak_newwin" parameterType="String">
+		update team_record
+		set streak = 1
+		where club_name = #{club_name}
+	</update>
+	
+	<!-- 연승실패 업데이트  -->
+	<update id="streak_newlose" parameterType="String">
+		update team_record
+		set streak = -1
+		where club_name = #{club_name}
+	</update>
+
 </mapper>

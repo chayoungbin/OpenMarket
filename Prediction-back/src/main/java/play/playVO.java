@@ -7,6 +7,12 @@ public class playVO {
 	String away;
 	String prediction;
 	
+	public playVO(){}
+	public playVO(String matchday,String home,String away){
+		this.matchday = matchday;
+		this.home = home;
+		this.away = away;
+	}
 	public playVO(String matchday,String home,String away,String prediction){
 		this.matchday = matchday;
 		this.home = home;
