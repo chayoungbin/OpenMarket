@@ -63,4 +63,11 @@
     	from team_record
     	where club_name = '${value}'
     </select>
+    
+    <!-- 양팀간 가장 최근경기 가져오기(예측계산할때) -->
+    <select id="select_team_recent" parameterType="game_result.game_resultVO" resultType="game_result.game_resultVO">
+    	select * 
+    	from game_result 
+    	where home='${home}' and away='${away}' or home='${away}' and away='${home}' order by matchday desc limit 1;
+    </select>
 </mapper>

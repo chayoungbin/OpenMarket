@@ -18,6 +18,8 @@ public class team_recordDTO {
 		this.lose = lose;
 	}
 
+	public team_recordDTO(){}
+	
 	public String getClub_name() {
 		return club_name;
 	}

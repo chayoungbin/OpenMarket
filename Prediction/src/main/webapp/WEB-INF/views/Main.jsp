@@ -10,12 +10,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>프론트오피스</title>
+<style>
+#main_img{
+	background-color:green;
+}
+#main_img img{
+	width:1000px;
+	height:600px;
+}
+</style>
 </head>
 <body>
 <jsp:include page="Navbar.jsp" />
 <center>
 <h1>메인페이지 입니다</h1><p>
-여기 게시판이 있으면 좋을 듯
+<hr />
+<div id="main_img">
+<img src="resources/image/main.PNG" alt="메인사진" />
+</div>
+</center>
+<hr />
+<center>
+<div>
+@CopyRight
+</div>
+<br />
 </center>
 </body>
 </html>

@@ -37,6 +37,7 @@
 		<option value="samsung">삼성</option>
 		<option value="kt">KT</option>
 </select><p>
+배당률 : <input type="text" id="home_bat" size=5 /> : <input type="text" id="away_bat" size=5 /><p>
 <input id="ajax_button" type="button" value="예측정보 가져오기" /><span id="ajax_result">연결중...</span>
 <p>
 예측 : 
@@ -53,7 +54,7 @@ $('#ajax_button').click(function(){
 $.ajax({
 	type : "POST",
 	url : "./Information",
-	data : {home : $('#home').val() , away : $('#away').val()},
+	data : {home : $('#home').val() , away : $('#away').val() , home_bat : $('#home_bat').val() , away_bat : $('#away_bat').val() },
 	success : WhenSuccess,
 	error : WhenError	
 });

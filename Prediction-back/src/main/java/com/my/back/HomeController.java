@@ -184,6 +184,12 @@ public class HomeController {
 	public String Information(HttpServletRequest request,Model model){
 		String home = request.getParameter("home");
 		String away = request.getParameter("away");
+		String home_bat_s = request.getParameter("home_bat");
+		String away_bat_s = request.getParameter("away_bat");
+		double home_bat = Double.parseDouble(home_bat_s);
+		double away_bat = Double.parseDouble(away_bat_s);
+		
+		
 		double prediction_home = 0.0; //홈이 이길 확률
 		double prediction_away = 0.0; //원정이 이길 확률
 		
@@ -221,9 +227,58 @@ public class HomeController {
 			double away_streak = rVO2.getStreak();
 			int away_total = rVO2.getTotal();
 			//원정팀 기록 가져옴	
-						
-			prediction_home = prediction_home + ((((double)win/((double)win+(double)lose+(double)tie))*100)*0.2)+(homewin_rate*10)+((double)homescore_success/(double)home_total)-((double)homescore_fail/(double)home_total)+home_streak;
-			prediction_away = prediction_away + ((((double)lose/((double)win+(double)lose+(double)tie))*100)*0.2)+(awaywin_rate*10)+((double)awayscore_success/(double)away_total)-((double)awayscore_fail/(double)away_total)+away_streak;
+			
+			if(home_streak > 5){
+				prediction_home -=5;
+			}else if(home_streak > 3){
+				prediction_home -=2.5;
+			}
+			if(home_streak < -5){
+				prediction_home +=5;
+			}else if(home_streak < -3){
+				prediction_home +=2.5;
+			}
+			if(away_streak > 5){
+				prediction_away -=5;
+			}else if(away_streak > 3){
+				prediction_away -=2.5;
+			}
+			if(away_streak < -5){
+				prediction_away +=5;
+			}else if(away_streak < -3){
+				prediction_away +=2.5;
+			}
+			
+			
+			game_resultVO gameResult = new game_resultVO(home, away);
+			List<game_resultVO> game = sqlSession.selectList("selectMapper.select_team_recent",gameResult);
+			if(game.size() !=0){
+			game_resultVO gVO = game.get(0);
+			String gameRe_home = gVO.getHome();
+			String gameRe_away = gVO.getAway();
+			int gameRe_homescore = gVO.getHome_score();
+			int gameRe_awayscore = gVO.getAway_score();
+			if(gameRe_home.equals(home) && gameRe_homescore > gameRe_awayscore){
+				prediction_home -=1.5;
+				prediction_away +=1.5;
+			}else if(gameRe_home.equals(home) && gameRe_homescore < gameRe_awayscore){
+				prediction_home +=1.5;
+				prediction_away -=1.5;
+			}
+			if(gameRe_home.equals(away) && gameRe_homescore > gameRe_awayscore){
+				prediction_home +=1.5;
+				prediction_away -=1.5;
+			}else if(gameRe_home.equals(away) && gameRe_homescore < gameRe_awayscore){
+				prediction_home -=1.5;
+				prediction_away +=1.5;
+			}
+			}
+			 //전날경기인데... 이걸 놓치네 ㄷㄷ
+			prediction_home += away_bat;
+			prediction_away += home_bat;
+			
+			prediction_home = prediction_home + (((double)win/((double)win+(double)lose+(double)tie))*20)+(homewin_rate*10)+((double)homescore_success/(double)home_total)-((double)homescore_fail/(double)home_total);
+			prediction_away = prediction_away + (((double)lose/((double)win+(double)lose+(double)tie))*20)+(awaywin_rate*10)+((double)awayscore_success/(double)away_total)-((double)awayscore_fail/(double)away_total);
 			
 			model.addAttribute("home_rate",prediction_home);
 			model.addAttribute("away_rate",prediction_away);

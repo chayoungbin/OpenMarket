@@ -8,6 +8,12 @@ public class game_resultVO {
 	int home_score;
 	int away_score;
 	String forecate;
+	public game_resultVO(){}
+	
+	public game_resultVO(String home,String away){
+		this.home = home;
+		this.away = away;
+	}
 	
 	public game_resultVO(String matchday,String home,String away,int home_score,int away_score,String forecate){
 		this.matchday = matchday;

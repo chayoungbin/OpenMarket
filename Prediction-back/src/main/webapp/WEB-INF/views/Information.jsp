@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-홈 : ${home_rate} , 원정 : ${away_rate} ::: ${result} ${ss} , ${sf} , ${wr}
+홈 : ${home_rate} , 원정 : ${away_rate} ::: ${result} 
 </body>
 </html>

@@ -16,6 +16,8 @@ public class teamDTO {
 		this.score_s = score_s;
 		this.score_f = score_f;
 	}
+	
+	public teamDTO(){}
 
 	public int getRank() {
 		return rank;
